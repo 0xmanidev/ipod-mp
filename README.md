@@ -5,3 +5,13 @@ screenshot:
 demo link
 https://0xmanidev.github.io/ipod-mp/
 
+controls(very similar to ipod):
+- center button- select/long hold for repeat in main menu
+- play/pause button
+- next button
+- previous button
+- scrubbing the timeline by rotating the ring
+
+only four controls overall
+
+made with ❤️ by manikanta
