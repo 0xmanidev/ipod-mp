@@ -76,8 +76,13 @@ function loadTrack(idx) {
 
 function setPlaying(val) {
   playing = val;
+
   if (val) {
-    audio.play();
+    audio.play().catch(err => {
+      console.log('Playback blocked:', err);
+      playing = false;
+    });
+
     btnPlay.innerHTML = ICON_PAUSE;
     statusPlay.textContent = '⏸';
   } else {
@@ -208,15 +213,25 @@ audio.addEventListener('loadedmetadata', () => {
 });
 
 audio.addEventListener('ended', () => {
-  if (repeat) { audio.currentTime = 0; audio.play(); return; }
+  if (repeat) {
+    audio.currentTime = 0;
+    audio.play().catch(console.error);
+    return;
+  }
+
   const n = shuffled
     ? Math.floor(Math.random() * tracks.length)
     : (current + 1) % tracks.length;
-  if (n === 0 && !shuffled) { setPlaying(false); loadTrack(0); return; }
-  loadTrack(n);
-  audio.play();
-});
 
+  if (n === 0 && !shuffled) {
+    setPlaying(false);
+    loadTrack(0);
+    return;
+  }
+
+  loadTrack(n);
+  audio.play().catch(console.error);
+});
 fileInput.addEventListener('change', e => {
   const wasEmpty = tracks.length === 0;
   Array.from(e.target.files).forEach(f => {
