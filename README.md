@@ -1,3 +1,4 @@
+[AI USAGE DECLARATION] ai is used for ideation and prototyping
 # ipod-mp
 this is a ipod style music player web based and local audio player
 screenshot:
